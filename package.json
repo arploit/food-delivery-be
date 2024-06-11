@@ -1,0 +1,19 @@
+{
+  "name": "food-delivery-be",
+  "version": "0.0.0",
+  "description": "Food Delivery Backend",
+  "main": "N",
+  "author": "Arpesh Shrivastava",
+  "license": "Y",
+  "private": false,
+  "scripts": {
+    "start": "yarn nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "mongodb": "^6.7.0",
+    "node": "^20.14.0",
+    "nodemon": "^3.1.3"
+  }
+}
