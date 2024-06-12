@@ -1,18 +1,20 @@
-const { connectDB, validateUser } = require('../../utils/helper');
+const { validateUser } = require('../../utils/helper');
+let { MongoClient } = require('mongodb');
 
 let url = 'mongodb://localhost:27017/';
 
 const dbName = 'Person';
-const signup = async (request, response) => {
+const Signup = async (request, response) => {
   try {
-    const client = await connectDB(url);
-    db = client.db(dbName);
-    const users = db.collection('Users');
-
+    const client = await MongoClient.connect(url);
+    const users = client.db(dbName).collection('Users');
     const query = { ...request.body };
     const result = await users.find(query).toArray();
+    console.log('result', result, result.length);
     if (result.length) {
-      response.send('User Already exist');
+      console.log('inside if');
+      response.sendStatus(400).send('User Already exist');
+      return;
     }
 
     const isUserValid = validateUser(request.body);
@@ -21,12 +23,11 @@ const signup = async (request, response) => {
       users.insert({ ...request.body });
       response.send('Signup Successfull');
     } else {
-      response.sendStatus(403);
-      response.json('Unable to Signup');
+      response.sendStatus(400).json({ message: 'Unable to Signup' });
     }
   } catch (e) {
     response.send(e);
   }
 };
 
-module.exports = signup;
+module.exports = Signup;
