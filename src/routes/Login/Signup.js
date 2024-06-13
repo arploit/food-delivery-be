@@ -13,17 +13,18 @@ const Signup = async (request, response) => {
     console.log('result', result, result.length);
     if (result.length) {
       console.log('inside if');
-      response.sendStatus(400).send('User Already exist');
+      response.status(400).send('User Already exist');
       return;
     }
 
+    // debugger;
     const isUserValid = validateUser(request.body);
 
     if (isUserValid.status) {
       users.insert({ ...request.body });
       response.send('Signup Successfull');
     } else {
-      response.sendStatus(400).json({ message: 'Unable to Signup' });
+      response.status(400).json({ message: 'Unable to Signup' });
     }
   } catch (e) {
     response.send(e);
