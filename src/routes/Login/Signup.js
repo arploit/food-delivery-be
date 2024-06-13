@@ -21,7 +21,7 @@ const Signup = async (request, response) => {
     const isUserValid = validateUser(request.body);
 
     if (isUserValid.status) {
-      users.insert({ ...request.body });
+      users.insertOne({ ...request.body });
       response.send('Signup Successfull');
     } else {
       response.status(400).json({ message: 'Unable to Signup' });
