@@ -4,9 +4,11 @@ const router = express.Router();
 let { MongoClient } = require('mongodb');
 let bodyParser = require('body-parser');
 
-const Signup = require('./src/routes/Login/Signup');
+const { Signup, Login } = require('./src/routes/Login/index');
+
 let port = 3000;
 
+debugger;
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
@@ -27,7 +29,10 @@ MongoClient.connect(url, (err, db) => {
 });
 
 server.use(router);
+
+// region Routes
 router.post('/signup', Signup);
+router.post('/login', Login);
 
 server.get('/', (req, res) => {
   res.send('Hello world');

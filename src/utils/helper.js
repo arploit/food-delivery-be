@@ -1,11 +1,11 @@
 let { MongoClient } = require('mongodb');
 
-const connectDB = async (connectionUrl) => {
-  return await MongoClient.connect(url);
+const connectDB = async (connectionUrl = 'mongodb://localhost:27017/') => {
+  return await MongoClient.connect(connectionUrl);
 };
 
 const validateUser = (requestBody) => {
-  const { userName, name, address, phoneNumber } = requestBody;
+  const { userName, name, address, phoneNumber, emailId } = requestBody;
 
   if (
     typeof userName === 'string' ||
@@ -14,7 +14,8 @@ const validateUser = (requestBody) => {
     typeof address.city === 'string' ||
     typeof address.state === 'string' ||
     typeof address.zip === 'number' ||
-    typeof phoneNumber === 'number'
+    typeof phoneNumber === 'number' ||
+    typeof emailId === 'string'
   ) {
     return {
       status: true,

@@ -8,16 +8,17 @@ const Signup = async (request, response) => {
   try {
     const client = await MongoClient.connect(url);
     const users = client.db(dbName).collection('Users');
-    const query = { ...request.body };
-    const result = await users.find(query).toArray();
-    console.log('result', result, result.length);
+    const isUserExistQuery = {
+      userName: request.body.userName,
+      emailId: request.body.emailId,
+    };
+    const result = await users.find(isUserExistQuery).toArray();
+    console.log('result', result);
     if (result.length) {
-      console.log('inside if');
       response.status(400).send('User Already exist');
       return;
     }
 
-    // debugger;
     const isUserValid = validateUser(request.body);
 
     if (isUserValid.status) {
