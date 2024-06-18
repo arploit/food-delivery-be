@@ -5,6 +5,7 @@ let { MongoClient } = require('mongodb');
 let bodyParser = require('body-parser');
 
 const { Signup, Login } = require('./src/routes/Login/index');
+const { foodUpload } = require('./src/routes/Food/index');
 
 let port = 3000;
 
