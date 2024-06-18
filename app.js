@@ -5,7 +5,7 @@ let { MongoClient } = require('mongodb');
 let bodyParser = require('body-parser');
 
 const { Signup, Login } = require('./src/routes/Login/index');
-const { foodUpload } = require('./src/routes/Food/index');
+const { Upload } = require('./src/routes/Food/index');
 
 let port = 3000;
 
@@ -34,6 +34,7 @@ server.use(router);
 // region Routes
 router.post('/signup', Signup);
 router.post('/login', Login);
+router.post('/food/upload', Upload);
 
 server.get('/', (req, res) => {
   res.send('Hello world');

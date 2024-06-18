@@ -1,5 +1,5 @@
-const Upload = require('./Upload');
+const Upload = require('./Upload-food');
 
 module.exports = {
-  foodUpload: Upload,
+  Upload,
 };
