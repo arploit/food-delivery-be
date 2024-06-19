@@ -5,7 +5,7 @@ let { MongoClient } = require('mongodb');
 let bodyParser = require('body-parser');
 
 const { Signup, Login } = require('./src/routes/Login/index');
-const { Upload } = require('./src/routes/Food/index');
+const { Upload, getFood } = require('./src/routes/Food/index');
 
 let port = 3000;
 
@@ -35,10 +35,7 @@ server.use(router);
 router.post('/signup', Signup);
 router.post('/login', Login);
 router.post('/food/upload', Upload);
-
-server.get('/', (req, res) => {
-  res.send('Hello world');
-});
+router.get('/food/get', getFood);
 
 server.listen(port, (e) => {
   console.log('connection succesfull on port:', port);
